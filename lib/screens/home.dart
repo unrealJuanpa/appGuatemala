@@ -6,7 +6,7 @@ import '../services/data.dart';
 int _selectedIndex = 0;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -89,6 +89,17 @@ class PlacesPage extends ConsumerWidget {
                   onTap: () {
                     print('Se ha tocado el elemento con el índice: $index');
                     places[index].visited = !places[index].visited;
+
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: Duration(
+                            seconds:
+                                0), // Duración de la animación (0 segundos para una transición instantánea)
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            PlacesPage(), // Reemplaza PlacesPage con el nombre de tu clase de pantalla
+                      ),
+                    );
                   },
                 );
               },
